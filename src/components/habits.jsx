@@ -3,41 +3,27 @@ import Habit from './habit';
 import HabitAddForm from './habitAddForm';
 
 class Habits extends Component {
-  state = {
-    habits: [
-      { id: 1, name: 'Reading', count: 0 },
-      { id: 2, name: 'Running', count: 0 },
-      { id: 3, name: 'Coding', count: 0 },
-    ],
+
+
+  handleIncrease = habit => {
+    this.props.onIncrement(habit);
   };
 
-  handleIncrease = (habit) => {
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    habits[index].count++;
-    this.setState({ habits });
+  handleDecrease = habit => {
+    this.props.onDecrement(habit);
   };
 
-  handleDecrease = (habit) => {
-    const habits = [...this.state.habits];
-    const index = habits.indexOf(habit);
-    const count = habits[index].count - 1;
-    habits[index].count = count < 0 ? 0 : count;
-    this.setState({ habits });
-
-  };
-
-  handleDelete = (habit) => {
-    const habits = [...this.state.habits].filter(item => item.id !== habit.id);
-    this.setState({ habits });
+  handleDelete = habit => {
+    this.props.onDelete(habit);
   };
 
   render() {
+
     return (
       <div className="habits">
         <HabitAddForm />
         <ul>
-          {this.state.habits.map(habit =>
+          {this.props.habits.map(habit =>
           (<Habit key={habit.id} habit={habit}
             onIncrement={this.handleIncrease}
             onDecrement={this.handleDecrease}
