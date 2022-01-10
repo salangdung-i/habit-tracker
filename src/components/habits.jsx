@@ -25,11 +25,12 @@ class Habits extends Component {
   render() {
     return (
       <div className="habits">
-        <HabitAddForm
-          onAdd={this.handleAddForm} />
+        <HabitAddForm onAdd={this.handleAddForm} />
         <ul>
           {this.props.habits.map(habit =>
-          (<Habit key={habit.id} habit={habit}
+          (<Habit
+            key={habit.id}
+            habit={habit}
             onIncrement={this.handleIncrease}
             onDecrement={this.handleDecrease}
             onDelete={this.handleDelete} />
