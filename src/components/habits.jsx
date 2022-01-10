@@ -17,11 +17,16 @@ class Habits extends Component {
     this.props.onDelete(habit);
   };
 
-  render() {
+  handleAddForm = name => {
+    this.props.onAdd(name);
+  };
 
+
+  render() {
     return (
       <div className="habits">
-        <HabitAddForm />
+        <HabitAddForm
+          onAdd={this.handleAddForm} />
         <ul>
           {this.props.habits.map(habit =>
           (<Habit key={habit.id} habit={habit}
@@ -30,7 +35,7 @@ class Habits extends Component {
             onDelete={this.handleDelete} />
           ))}
         </ul>
-        <button className="habits-reset">Reset All</button>
+        <button className="habits-reset" onClick={this.props.onReset}>Reset All</button>
       </div>
     );
   }
